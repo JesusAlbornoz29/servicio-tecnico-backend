@@ -1,0 +1,24 @@
+# Compilados
+/target
+*.class
+
+# Archivos del IDE
+.idea/
+*.iml
+
+# Archivos del sistema
+.DS_Store
+
+# Configuración de logs
+*.log
+
+# Configs locales
+application.properties
+.env
+
+# Librerías descargadas (por Gradle si usás)
+.gradle/
+build/
+
+# Base de datos
+*.db
