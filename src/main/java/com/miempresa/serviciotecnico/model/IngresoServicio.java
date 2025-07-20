@@ -26,5 +26,9 @@ public class IngresoServicio {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 }
