@@ -55,6 +55,27 @@ public class IngresoServicioController {
 
                     return ingresoServicioRepository.save(i);
                 }).orElse(null);
+
+
+        @PatchMapping("/{id}")
+        public ingresoServicio patch(@PathVariable Long id, @RequestBody IngresoServicio datos){
+            return ingresoServicioRepository.findById(id)
+                    .map(i -> {
+                        if (datos.getFechaIngreso() != null) i.setFechaIngreso(datos.getFechaIngreso());
+                        if (datos.getProblemaReportado() != null) i.setProblemaReportado(datos.getProblemaReportado());
+                        if (datos.getEnGarantia() != null) i.setEnGarantia(datos.getEnGarantia());
+                        if (datos.getGarantiaProveedor() != null) i.setGarantiaProveedor(datos.getGarantiaProveedor());
+                        if (datos.getObservaciones() != null) i.setObservaciones(datos.getObservaciones());
+                        if (datos.getCliente() != null) i.setCliente(datos.getCliente());
+                        if (datos.getProducto() != null) i.setProducto(datos.getProducto());
+
+                        return ingresoServicioRepository.save(i);
+                    }).orElse(null);
+
+
+
+        }
+
     }
 
 
