@@ -58,7 +58,7 @@ public class IngresoServicioController {
     }
 
         @PatchMapping("/{id}")
-        public ingresoServicio patch(@PathVariable Long id, @RequestBody IngresoServicio datos){
+        public IngresoServicio patch(@PathVariable Long id, @RequestBody IngresoServicio datos){
             return ingresoServicioRepository.findById(id)
                     .map(i -> {
                         if (datos.getFechaIngreso() != null) i.setFechaIngreso(datos.getFechaIngreso());
