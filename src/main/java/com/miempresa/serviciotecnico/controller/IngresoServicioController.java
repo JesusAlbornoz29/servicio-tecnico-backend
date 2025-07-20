@@ -39,4 +39,23 @@ public class IngresoServicioController {
         }
         return null;
     }
+
+    @PutMapping("/{id}")
+    public IngresoServicio update(@PathVariable Long id, @RequestBody IngresoServicio datos) {
+        return ingresoServicioRepository.findById(id)
+                .map(i -> {
+                    i.setFechaIngreso(datos.getFechaIngreso());
+                    i.setProblemaReportado(datos.getProblemaReportado());
+                    i.setEnGarantia(datos.getEnGarantia());
+                    i.setGarantiaProveedor(datos.getGarantiaProveedor());
+                    i.setObservaciones(datos.getObservaciones());
+
+                    if(datos.getCliente() != null) i.setCliente(datos.getCliente());
+                    if(datos.getProducto() != null) i.setProducto(datos.getProducto());
+
+                    return ingresoServicioRepository.save(i);
+                }).orElse(null);
+    }
+
+
 }
