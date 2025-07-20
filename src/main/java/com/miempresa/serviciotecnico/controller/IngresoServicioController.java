@@ -50,12 +50,12 @@ public class IngresoServicioController {
                     i.setGarantiaProveedor(datos.getGarantiaProveedor());
                     i.setObservaciones(datos.getObservaciones());
 
-                    if(datos.getCliente() != null) i.setCliente(datos.getCliente());
-                    if(datos.getProducto() != null) i.setProducto(datos.getProducto());
+                    if (datos.getCliente() != null) i.setCliente(datos.getCliente());
+                    if (datos.getProducto() != null) i.setProducto(datos.getProducto());
 
                     return ingresoServicioRepository.save(i);
                 }).orElse(null);
-
+    }
 
         @PatchMapping("/{id}")
         public ingresoServicio patch(@PathVariable Long id, @RequestBody IngresoServicio datos){
@@ -72,10 +72,12 @@ public class IngresoServicioController {
                         return ingresoServicioRepository.save(i);
                     }).orElse(null);
 
-
-
         }
 
+
+        @DeleteMapping("/{id}")
+            public void delete(@PathVariable Long id){
+                ingresoServicioRepository.deleteById(id);
     }
 
 
