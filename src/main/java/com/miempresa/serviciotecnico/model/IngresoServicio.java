@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -31,4 +32,7 @@ public class IngresoServicio {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
+
+    @OneToMany(mappedBy = "ingresoServicio", cascade = CascadeType.ALL)
+    private List<ComentarioIngreso> comentarios;
 }

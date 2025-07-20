@@ -1,6 +1,7 @@
 package com.miempresa.serviciotecnico.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,5 +25,6 @@ public class ComentarioIngreso {
 
     @ManyToOne
     @JoinColumn(name = "ingreso_id")
+    @JsonIgnore
     private IngresoServicio ingresoServicio;
 }
