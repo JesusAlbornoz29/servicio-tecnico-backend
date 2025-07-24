@@ -23,9 +23,12 @@ public class ClienteConroller {
     }
 
     @GetMapping("/{id}")
-    public Cliente getById(@PathVariable Long id){
-        return clienteRepository.findById(id).orElse(null);
+    public ResponseEntity<?> obtenerClientePorId(@PathVariable Long id) {
+        return clienteRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     @GetMapping("cedula/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable String cedula) {
