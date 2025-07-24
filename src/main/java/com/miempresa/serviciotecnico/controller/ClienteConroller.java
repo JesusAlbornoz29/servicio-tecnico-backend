@@ -3,7 +3,9 @@ package com.miempresa.serviciotecnico.controller;
 
 import com.miempresa.serviciotecnico.model.Cliente;
 import com.miempresa.serviciotecnico.repository.ClienteRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,13 @@ public class ClienteConroller {
     @GetMapping("/{id}")
     public Cliente getById(@PathVariable Long id){
         return clienteRepository.findById(id).orElse(null);
+    }
+
+    @GetMapping("cedula/{cedula}")
+    public ResponseEntity<?> findByCedula(@PathVariable String cedula) {
+        return clienteRepository.findByCedula(cedula)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
