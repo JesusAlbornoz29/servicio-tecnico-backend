@@ -2,13 +2,16 @@ package com.miempresa.serviciotecnico.controller;
 
 
 import com.miempresa.serviciotecnico.model.Cliente;
+import com.miempresa.serviciotecnico.model.Producto;
 import com.miempresa.serviciotecnico.repository.ClienteRepository;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -24,9 +27,15 @@ public class ClienteConroller {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerClientePorId(@PathVariable Long id) {
-        return clienteRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+
+        if (cliente.isPresent()) {
+            return ResponseEntity.ok(cliente.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Cliente no encontrado con el ID: " + id);
+        }
+
     }
 
 
