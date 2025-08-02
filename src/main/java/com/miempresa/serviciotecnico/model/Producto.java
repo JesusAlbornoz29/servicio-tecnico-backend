@@ -15,9 +15,13 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column (unique = true, nullable = false)
+    private String codigo;
+
     private String tipo;
     private String marca;
     private String modelo;
+
     @Column(unique = true)
     private String numeroSerie;
 
