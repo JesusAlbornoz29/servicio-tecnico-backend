@@ -59,6 +59,24 @@ public class ProveedorController {
                 .body(proveedorRepository.save(proveedor));
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> patch(@PathVariable Long id, @RequestBody Proveedor datos) {
+        Optional<Proveedor> optional = proveedorRepository.findById(id);
+
+        if (optional.isPresent()) {
+            Proveedor proveedor = optional.get();
+            if (datos.getNombre() != null) proveedor.setNombre(datos.getNombre());
+            if (datos.getDireccion() != null) proveedor.setDireccion(datos.getDireccion());
+            if (datos.getTelefono() != null) proveedor.setTelefono(datos.getTelefono());
+            if (datos.getEmail() != null) proveedor.setEmail(datos.getEmail());
+            return ResponseEntity.ok(proveedorRepository.save(proveedor));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Proveedor no encontrado con ID: " + id);
+        }
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         if (proveedorRepository.existsById(id)) {
