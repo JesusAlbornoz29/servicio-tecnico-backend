@@ -59,4 +59,15 @@ public class ProveedorController {
                 .body(proveedorRepository.save(proveedor));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        if (proveedorRepository.existsById(id)) {
+            proveedorRepository.deleteById(id);
+            return ResponseEntity.ok("Proveedor eliminado con exito.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Proveedor no encontrado con ID: " + id);
+        }
+    }
+
     }
